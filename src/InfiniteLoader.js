@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import styles from './InfiniteLoader.css'
-import CSSModules from 'react-css-modules'
-import loader from '!raw!../assets/images/spin.svg'
+/*import loader from '!raw!../assets/images/spin.svg'*/
 import Visit from './Visit'
 
 /* styles, plus move in the svg
@@ -23,12 +21,10 @@ import Visit from './Visit'
 }
 */
 
-@CSSModules(styles)
 export default class InfiniteLoader extends Component {
 
   constructor(props) {
-    super(props);
-
+    super(props)
     this.state = {
       loading: false
     }
@@ -40,7 +36,7 @@ export default class InfiniteLoader extends Component {
     setTimeout( () => {
       this.refs['loaderVisit'].revisit()
       this.setState({ loading: false })
-    }, 2000);
+    }, 2000)
 
   }
 
@@ -50,13 +46,13 @@ export default class InfiniteLoader extends Component {
 
   render() {
 
-    const { loading } = this.state;
+    const { loading } = this.state
 
     return (
-      <div styleName='InfiniteLoader'>
-        { loading ? <span styleName='Loader' dangerouslySetInnerHTML={{__html: loader }} /> : null }
+      <div className='InfiniteLoader'>
+        { loading ? <span className='Loader'>loading...</span> : null }
         <Visit ref="loaderVisit" visited={ this.visited.bind(this) } />
       </div>
-    );
+    )
   }
 }
