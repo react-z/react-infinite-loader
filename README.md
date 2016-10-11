@@ -12,8 +12,6 @@ An infinite loader react component based on [react-visit](https://github.com/Ste
 
 ## Usage
 
-## Usage basic
-
 Add the infinite loader component below the items in you list. When the loader is in view the onVisited event will fire for you to reload more data. Check out the [example](https://github.com/StevenIseki/react-infinite-loader/blob/master/example) for more info.
 
 ```jsx
