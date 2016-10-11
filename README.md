@@ -4,6 +4,8 @@ An infinite loader react component based on [react-visit](https://github.com/Ste
 
 [![npm version](https://badge.fury.io/js/react-infinite-loader.svg)](https://badge.fury.io/js/react-infinite-loader)
 
+![](https://raw.githubusercontent.com/StevenIseki/react-infinite-loader/master/example/screenshot.gif)
+
 ## Install
 
 `npm install react-infinite-loader --save`
@@ -71,7 +73,7 @@ ReactDOM.render(<TestComponent />, document.getElementById('root'))
 
 ## Props
 
-- `onVisited()``
+- `onVisited()`
 
 A function to call when the loader comes into the viewport. This is when you normally will load more items.
 
