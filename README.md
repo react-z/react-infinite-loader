@@ -1,9 +1,8 @@
-# react-visit
+# react-infinite-loader
 
-a react infinite loader component
+An infinite loader react component based on [react-visit](https://github.com/StevenIseki/react-visit)
 
-[![npm version](https://badge.fury.io/js/react-visit.svg)](https://badge.fury.io/js/react-visit)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![npm version](https://badge.fury.io/js/react-infinite-loader.svg)](https://badge.fury.io/js/react-infinite-loader)
 
 ## Install
 
@@ -11,24 +10,86 @@ a react infinite loader component
 
 ## Usage
 
-infinite loading added to a component and calls to fetch data
+## Usage basic
+
+Add the infinite loader component below the items in you list. When the loader is in view the onVisited event will fire for you to reload more data. Check out the [example](https://github.com/StevenIseki/react-infinite-loader/blob/master/example) for more info.
 
 ```jsx
-a work in progress
-```
+import InfiniteLoader from 'react-infinite-loader'
+import ReactDOM from 'react-dom'
+import React, { Component, PropTypes } from 'react'
 
-## Versions
+class TestComponent extends Component {
+
+  componentDidMount() {
+    this.loadItems()
+  }
+
+  loadItems() {
+    /* just simulating a load of more items from an api here */
+    setTimeout( () => {
+      let items = this.state.items.slice()
+      items = items.concat(this.getItems())
+      this.setState({ items: items })
+    }, 1000)
+  }
+
+  handleVisit () {
+    this.loadItems()
+  }
+
+  getItems() {
+    let items = []
+    for(var i = 0; i < 10; i++) {
+      items.push({ name: 'An item' })
+    }
+    return items
+  }
+
+  renderCards() {
+    const { items } = this.state
+    const cards = items.map((item, i) => {
+      return (
+        <div key={i}><h3>{item.name}</h3></div>
+      )
+    })
+    return cards
+  }
+
+  render () {
+    return (
+      <div>
+        { this.renderCards() }
+        <InfiniteLoader onVisited={ () => this.handleVisit() } />
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<TestComponent />, document.getElementById('root'))
+```
 
 ## Props
 
-- `visited()``
+- `onVisited()``
 
-function to call when the component has been visited. This runs when the visit component is visible in the viewport.
+A function to call when the loader comes into the viewport. This is when you normally will load more items.
+
+- `visitStyle`
+
+Style object to display the visit component, usually you want the visit component hidden, but may want to give it a margin bottom or negative margin bottom margin so it will be triggered earlier. Give the visitStyle a background color to see where it is triggered while testing. The element has the className `visit` if you need to style it with css.
+
+- `loaderStyle`
+
+Style object for the loader, usually some styles for a loader or spinner element. The element has the className `loader` if you need to style it with css as in the example [infinite-loader.css](https://github.com/StevenIseki/react-infinite-loader/blob/master/lib/infinite-loader.css)
+
+- `containerElement`
+
+The dom element to set the scroll event on, e.g. `document.querySelector('.container')`. If no containerElement is set react-infinite-loader will attach the scroll event to window, which is usually what you want unless in the case of a modal.
 
 ## Development
     npm install
     npm run build
-    npm test
     npm start
 
 ## License

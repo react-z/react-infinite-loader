@@ -1,106 +1,65 @@
-/* import InfiniteLoader from '../lib/InfiniteLoader' */
-import Visit from '../lib/Visit'
+import InfiniteLoader from '../src/InfiniteLoader'
 import ReactDOM from 'react-dom'
 import React, { Component, PropTypes } from 'react'
-import { createStore } from 'redux'
 
-function counter(state, action) {
-   if (typeof state === 'undefined') {
-     return 0
-   }
-   switch (action.type) {
-     case 'INCREMENT':
-       return state + 1
-     case 'DECREMENT':
-       return state - 1
-     default:
-       return state
-   }
- }
+class TestComponent extends Component {
 
- var store = createStore(counter)
-
-class ArticlesList extends Component {
-
-  _load () {
-    this.props.fetch()
+  constructor(props) {
+    super(props)
+    this.state = { items: [] }
   }
-  stop () {
-    this.refs['infiniteLoader'].stop()
-  }
-
-  render() {
-    const { articles } = this.props
-    return (
-      <div>
-        <div>
-          {map(articles, this.props.renderArticle)}
-        </div>
-        { /*<InfiniteLoader ref='infiniteLoader' stop={  this._load.bind(this) } load={ this._load.bind(this) } /> */}
-    </div>
-    )
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchFeed: section => dispatch(fetchFeed(section)),
-    feedViewed: () => dispatch(feedViewed())
-  }
-}
-class FeedContainer extends Component {
 
   componentDidMount() {
-    const { feedViewed } = this.props;
+    this.loadItems()
   }
-  _renderArticle(article, section) {
-    return <ArticleCard key={`feed_${article.article_id}`} article={article} />
-  }
-  _fetch (page) {
-    const { fetchFeed } = this.props
-    fetchFeed()
-}
 
-  render() {
-    const { feed, section, fetchFeed } = this.props;
+  loadItems() {
+    /* just simulating a load of more items from an api here */
+    setTimeout( () => {
+      let items = this.state.items.slice()
+      items = items.concat(this.getItems())
+      this.setState({ items: items })
+    }, 1000)
+  }
+
+  handleVisit () {
+    this.loadItems()
+  }
+
+  getItems() {
+    let items = []
+    for(var i = 0; i < 10; i++) {
+      items.push({ name: 'An item', description: 'A description of an item' })
+    }
+    return items
+  }
+
+  renderCards() {
+    const { items } = this.state
+    let cardStyle = { backgroundColor: 'white', padding: '1rem', margin: '1rem' }
+
+    const cards = items.map((item, i) => {
+      return (
+        <div key={i} style={cardStyle}>
+          <h3>{item.name}</h3>
+          <p>{item.description}</p>
+        </div>
+      )
+    })
+    return cards
+  }
+
+  render () {
+    let containerStyle = { paddingTop: '2rem', paddingBottom: '2rem', background: 'rgb(248, 245, 236)', position: 'relative' }
+    let visitStyle = { position: 'absolute', width: '100%', bottom: '10rem', height: '10rem' }
+
     return (
-      <div>
-        <ArticlesList ref='articles' articles={feed} renderArticle={this._renderArticle} fetch={ this._fetch.bind(this) } />
+      <div style={containerStyle}>
+        { this.renderCards() }
+        <InfiniteLoader visitStyle={visitStyle} onVisited={ () => this.handleVisit() } />
       </div>
     )
   }
 }
 
-class Counter extends Component {
-
-  visited () {
-    console.log('u visited me...')
-  }
-
-  render() {
-      const { value, onIncrement, onDecrement } = this.props
-      return (
-        <div>
-          <Visit visited={ this.visited.bind(this) }  />
-          <p>
-            Clicked: {value} times {' '}
-            <button onClick={onIncrement}>+</button>{' '}
-            <button onClick={onDecrement}>-</button>{' '}
-          </p>
-        </div>
-      )
-    }
-}
-
-
-function render() {
-  ReactDOM.render(
-    <Counter value={store.getState()}
-             onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-             onDecrement={() => store.dispatch({ type: 'DECREMENT' })} />,
-    document.getElementById('root')
-  )
-}
-
-render()
-store.subscribe(render)
+ReactDOM.render(<TestComponent />, document.getElementById('root'))
