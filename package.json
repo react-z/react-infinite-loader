@@ -24,9 +24,9 @@
     "expect": "^1.20.1",
     "express": "^4.13.4",
     "jsdom": "^9.2.1",
-    "react": "^15.1.0",
+    "react": "^16.4.1",
     "react-addons-test-utils": "^15.1.0",
-    "react-dom": "^15.1.0",
+    "react-dom": "^16.4.1",
     "tape": "^4.5.1",
     "webpack": "^1.13.1"
   },
@@ -55,5 +55,8 @@
     "react infinite loader",
     "reactjs",
     "react-component"
-  ]
+  ],
+  "dependencies": {
+    "prop-types": "^15.6.2"
+  }
 }
