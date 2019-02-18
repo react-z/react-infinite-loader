@@ -1,6 +1,6 @@
 {
   "name": "react-infinite-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An infinite loader react component",
   "main": "lib/InfiniteLoader.js",
   "repository": {
