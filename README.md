@@ -77,20 +77,28 @@ A function to call when the loader comes into the viewport. This is when you nor
 
 - `visitStyle`
 
-Style object to display the visit component, usually you want the visit component hidden, but may want to give it a margin bottom or negative margin bottom margin so it will be triggered earlier. Give the visitStyle a background color to see where it is triggered while testing. The element has the className `visit` if you need to style it with css.
+Style object to display the visit component, usually you want the visit component hidden, but may want to give it a margin bottom or negative bottom margin so it will be triggered earlier. Give the visitStyle a background color to see where it is triggered while testing. The element has the className `visit` if you need to style it with css.
 
 - `loaderStyle`
 
-Style object for the loader, usually some styles for a loader or spinner element. The element has the className `loader` if you need to style it with css as in the example [infinite-loader.css](https://github.com/StevenIseki/react-infinite-loader/blob/master/lib/infinite-loader.css)
+Style object for the loader, usually some styles for a loader or spinner element. styled-jsx is used for styling. To update the styles ...
 
 - `containerElement`
 
 The dom element to set the scroll event on, e.g. `document.querySelector('.container')`. If no containerElement is set react-infinite-loader will attach the scroll event to window, which is usually what you want unless in the case of a modal.
 
 ## Development
-    npm install
+    yarn
+    npm run dev
+
+## Build
+    yarn
     npm run build
-    npm start
+    npm login
+    npm version patch
+    git add -A
+    git push origin master
+    npm publish
 
 ## License
 

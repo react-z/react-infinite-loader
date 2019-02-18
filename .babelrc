@@ -1,1 +1,11 @@
-{ "presets": ["es2015","react"] }
+{
+  "presets": [
+    [
+      "@babel/preset-env"
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    ["styled-jsx/babel", { "optimizeForSpeed": true }]
+  ]
+}
