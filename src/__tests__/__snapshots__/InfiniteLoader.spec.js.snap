@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InfiniteLoader renders correctly and matches snapshot 1`] = `
+<span
+  className="jsx-1958290726"
+>
+  <div
+    className="jsx-1958290726 loader"
+  />
+  <span
+    className="jsx-1351883599 visit"
+    style={
+      Object {
+        "height": "10rem",
+        "marginTop": "-10rem",
+        "position": "absolute",
+        "visibility": "hidden",
+        "width": "100%",
+      }
+    }
+  />
+</span>
+`;

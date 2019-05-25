@@ -89,11 +89,16 @@ The dom element to set the scroll event on, e.g. `document.querySelector('.conta
 
 ## Development
     yarn
-    npm run dev
+    yarn dev
+
+## Test
+    yarn test
 
 ## Build
     yarn
-    npm run build
+    yarn build
+
+## Publish
     npm login
     npm version patch
     git add -A
